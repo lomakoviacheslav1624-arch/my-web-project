@@ -1,26 +1,99 @@
-
-
+/* Запобігає непередбачуваним overflow при додаванні padding */
+*, *::before, *::after {
+  box-sizing: border-box;
+  }
+  
 :root {
   --primary-color: #2563eb;
-  --text-color: #2c3c56;
-  --bg-color: #f8fafc;
-  --vl-color:  #55b955;
-}
+      --text-color: #2c3c56;
+          --bg-color: #f8fafc;
+              --vl-color: #55b955;
+                }
+                
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: sans-serif;
-}
-
+  margin: 0;
+    background-color: var(--bg-color);
+      color: var(--text-color);
+        font-family: sans-serif;
+        }
+        
+main {
+  padding: 0 15px;
+  }
+  
+header {
+  padding: 20px 0;
+  }
+  
+nav ul {
+  display: flex;
+    flex-direction: column;
+      gap: 10px;
+        list-style: none;
+          padding: 0;
+            margin: 0;
+            }
+            
+.my-navigation {
+  background-color: #e6dc8b;
+      padding: 15px;
+        border-radius: 10px;
+        }
+        
+.my-navigation a {
+  color: aqua;
+    text-decoration: none;
+      display: block;
+      }
+      
+.my-navigation a:hover {
+  text-decoration: underline;
+  }
+  
 h1 {
   color: var(--primary-color);
-}
+    margin: 0 0 10px;
+    }
+    
 h2 {
   color: var(--vl-color);
-}
-
-.my-navigation {
-  color:aqua;
-  background-color: #e6dc8b;
-
-}
+  }
+  
+.projects-container {
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      }
+      
+.project-card {
+  background: white;
+    padding: 20px;
+      border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+.project-card:hover {
+  transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+    
+@media (min-width: 768px) {
+  header {
+      display: flex;
+          justify-content: space-between;
+              align-items: center;
+                }
+                
+  nav ul {
+      flex-direction: row;
+        }
+        }
+        
+@media (min-width: 1200px) {
+  main {
+      max-width: 1100px;
+          margin: 0 auto;
+            }
+            }
+            
