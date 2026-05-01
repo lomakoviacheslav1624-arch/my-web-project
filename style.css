@@ -3,6 +3,31 @@
   box-sizing: border-box;
   }
   
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+a:focus {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+  
 :root {
   --primary-color: #2563eb;
       --text-color: #2c3c56;
@@ -18,7 +43,9 @@ body {
         }
         
 main {
-  padding: 0 15px;
+  max-width: 70ch;
+  margin: 0 auto;
+  padding: 0 1rem;
   }
   
 header {
