@@ -100,6 +100,78 @@ h2 {
           transition: transform 0.2s ease, box-shadow 0.2s ease;
           }
           
+.dark-theme {
+  background-color: #111;
+  color: #fff;
+}
+
+button {
+  cursor: pointer;
+}
+
+#theme-toggle,
+#open-modal {
+  margin: 0 0.75rem 0.75rem 0;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+#theme-toggle:hover,
+#open-modal:hover {
+  background-color: #1d4ed8;
+}
+
+#projects-list {
+  list-style: disc inside;
+  padding-left: 0;
+  margin: 0.75rem 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  color: #2c3c56;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.dark-theme .modal-content {
+  background: #222;
+  color: #fff;
+}
+
+.modal-content button,
+.modal-content input {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.modal-content input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+          
 .project-card:hover {
   transform: translateY(-5px);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);

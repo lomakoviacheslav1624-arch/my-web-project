@@ -43,9 +43,34 @@
       <p>email: lomako.viacheslav1624@vu.cdu.edu.ua</p>
     </article>
   </section>
+
+  <section id="projects">
+    <article>
+      <h2>Мої проєкти</h2>
+      <ul id="projects-list"></ul>
+    </article>
+  </section>
+
+  <section id="interaction">
+    <article>
+      <button id="theme-toggle" type="button">Змінити тему</button>
+      <button id="open-modal" type="button">Контакти</button>
+    </article>
+  </section>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="close-modal" type="button">Закрити</button>
+      <form id="contact-form">
+        <input type="text" id="user-name" placeholder="Ваше ім'я">
+        <button type="submit">Надіслати</button>
+      </form>
+    </div>
+  </div>
 </main>
 <footer>
   <p>© 2026 Ломако Вячеслав</p>
 </footer>
+<script src="scripts.js"></script>
 </body>
 </html>
