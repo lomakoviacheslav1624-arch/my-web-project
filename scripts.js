@@ -1,14 +1,16 @@
 ﻿console.log("JS connected!");
 
-const myProjects = [
+const projects = [
   { id: 1, title: "Сайт-візитка", tech: "HTML/CSS" },
-  { id: 2, title: "Магазин", tech: "JavaScript" }
+  { id: 2, title: "Todo App", tech: "JavaScript" },
+  { id: 3, title: "Портфоліо", tech: "HTML/CSS/JS" }
 ];
 
-console.log(myProjects[0]);
-console.log(myProjects[0].title);
+console.log(projects[0]);
+console.log(projects[0].title);
 
-const list = document.querySelector('#projects-list');
+const container = document.querySelector('#projects-container');
+const searchInput = document.querySelector('#search-input');
 const themeBtn = document.querySelector('#theme-toggle');
 const bodyElement = document.body;
 const openBtn = document.querySelector('#open-modal');
@@ -17,11 +19,36 @@ const modal = document.querySelector('#modal');
 const form = document.querySelector('#contact-form');
 const nameInput = document.querySelector('#user-name');
 
-if (list) {
-  myProjects.forEach(project => {
-    const li = document.createElement('li');
-    li.textContent = project.title + " (" + project.tech + ")";
-    list.appendChild(li);
+function createProjectCard(project) {
+  return `
+    <div class="project-card">
+      <h3>${project.title}</h3>
+      <p>${project.tech}</p>
+    </div>
+  `;
+}
+
+function renderProjects(list) {
+  if (!container) return;
+
+  const html = list
+    .map(project => createProjectCard(project))
+    .join('');
+
+  container.innerHTML = html;
+}
+
+renderProjects(projects);
+
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    const value = searchInput.value.toLowerCase();
+
+    const filtered = projects.filter(project =>
+      project.title.toLowerCase().includes(value)
+    );
+
+    renderProjects(filtered);
   });
 }
 
