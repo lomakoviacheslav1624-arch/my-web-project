@@ -1,74 +1,43 @@
-﻿console.log("JS connected!");
+﻿let allPosts = [];
 
-const projects = [
-  { id: 1, title: "Сайт-візитка", tech: "HTML/CSS" },
-  { id: 2, title: "Todo App", tech: "JavaScript" },
-  { id: 3, title: "Портфоліо", tech: "HTML/CSS/JS" }
-];
-
-console.log(projects[0]);
-console.log(projects[0].title);
-
-const container = document.querySelector('#projects-container');
+const loading = document.querySelector('#loading');
+const postsContainer = document.querySelector('#posts-container');
 const searchInput = document.querySelector('#search-input');
-const themeBtn = document.querySelector('#theme-toggle');
-const bodyElement = document.body;
-const openBtn = document.querySelector('#open-modal');
-const closeBtn = document.querySelector('#close-modal');
-const modal = document.querySelector('#modal');
-const form = document.querySelector('#contact-form');
-const nameInput = document.querySelector('#user-name');
 
-function createProjectCard(project) {
-  return `
-    <div class="project-card">
-      <h3>${project.title}</h3>
-      <p>${project.tech}</p>
-    </div>
-  `;
-}
-
-function renderProjects(list) {
-  if (!container) return;
+function renderPosts(list) {
+  if (!postsContainer) return;
 
   const html = list
-    .map(project => createProjectCard(project))
+    .map(post => `
+      <div class="post">
+        <h3>${post.title}</h3>
+        <p>${post.body}</p>
+      </div>
+    `)
     .join('');
 
-  container.innerHTML = html;
+  postsContainer.innerHTML = html;
 }
 
-renderProjects(projects);
-
-// Завантаження постів з зовнішнього API
 async function loadPosts() {
-  const loading = document.querySelector('#loading');
-  const postsContainer = document.querySelector('#posts-container');
-
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
     if (!response.ok) {
-      throw new Error('Помилка завантаження даних');
+      throw new Error('Помилка сервера');
     }
 
     const data = await response.json();
 
-    const html = data.slice(0, 5)
-      .map(post => `
-        <div class="post">
-          <h3>${post.title}</h3>
-          <p>${post.body}</p>
-        </div>
-      `)
-      .join('');
+    allPosts = data.slice(0, 10);
 
-    if (postsContainer) postsContainer.innerHTML = html;
+    renderPosts(allPosts);
+
     if (loading) loading.style.display = 'none';
 
   } catch (error) {
     console.error(error);
-    if (loading) loading.textContent = 'Помилка завантаження даних';
+    if (loading) loading.textContent = 'Помилка завантаження';
   }
 }
 
@@ -78,48 +47,10 @@ if (searchInput) {
   searchInput.addEventListener('input', () => {
     const value = searchInput.value.toLowerCase();
 
-    const filtered = projects.filter(project =>
-      project.title.toLowerCase().includes(value)
+    const filtered = allPosts.filter(post =>
+      post.title.toLowerCase().includes(value)
     );
 
-    renderProjects(filtered);
-  });
-}
-
-if (themeBtn) {
-  themeBtn.addEventListener('click', () => {
-    bodyElement.classList.toggle('dark-theme');
-  });
-}
-
-if (openBtn && closeBtn && modal) {
-  openBtn.addEventListener('click', () => {
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-  });
-}
-
-if (form && nameInput) {
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    if (nameInput.value.trim().length < 2) {
-      alert("Ім'я має містити щонайменше 2 символи");
-    } else {
-      alert("Форму відправлено!");
-      form.reset();
-    }
+    renderPosts(filtered);
   });
 }
