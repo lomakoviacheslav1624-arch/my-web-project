@@ -102,6 +102,14 @@ h2 {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.post {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: white;
+}
+
 .projects-container {
   display: grid;
   gap: 1rem;
